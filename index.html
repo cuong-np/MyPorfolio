@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Developer Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector(".tablinks").click();
+        });
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2E2B28;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding-top: 50px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 55%;
+            padding: 20px;
+            background-color: #403D39;
+            border-radius: 10px;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .header-subtitle {
+            font-size: 16px;
+        }
+        .tab {
+            display: flex;
+            gap: 15px;
+        }
+        .tab button {
+            background-color: inherit;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: 0.3s;
+            font-size: 16px;
+            color: white;
+        }
+        .tab button:hover {
+            background-color: #5C5346;
+        }
+        .tab button.active {
+            background-color: #726658;
+        }
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            width: 55%;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .about-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .about-text {
+            width: 55%;
+        }
+        .about-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+        .project {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .contact-highlight {
+            font-weight: bold;
+            color: #FFD700;
+        }
+        @media (max-width: 768px) {
+            header, .tabcontent {
+                width: 90%;
+            }
+            .about-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .about-text {
+                width: 100%;
+            }
+            .about-avatar {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1 class="header-title">NGUYEN PHAN CUONG</h1>
+            <p class="header-subtitle">Game Developer | Unity | Roblox</p>
+        </div>
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'About')">About Me</button>
+            <button class="tablinks" onclick="openTab(event, 'Projects')">Projects</button>
+        </div>
+    </header>
+    
+    <section id="About" class="tabcontent" style="display:block;">
+        <div class="about-container">
+            <div class="about-text">
+                <h2>About Me</h2>
+                <p>I have been a game developer with 5 years working in Unity and Roblox.</p>
+                <p>Familiar with animation, physics, materials, and networking in game development.</p>
+                <p>Skilled in debug and optimizing game performance.</p>
+                <p>Experienced in game mechanics, user interactions, and multiplayer features.</p>
+                <h3>Contact</h3>
+                <p class="contact-highlight">Email: nguyenphancuong097@gmail.com</p>
+            </div>
+            <img class="about-avatar" src="https://github.com/cuong-np.png" alt="GitHub Avatar">
+        </div>
+    </section>
+    
+    <section id="Projects" class="tabcontent">
+        <h2>Projects</h2>
+        <div class="project">
+            <h3 style="font-size: 115%; text-transform: uppercase;">Main Land</h3>
+            <p>A multiplayer place in Roblox where users can go shopping, selfie, and play many minigames together.</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/0TRUos_xuAA" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="project">
+            <h3 style="font-size: 115%; text-transform: uppercase;">Zombie Idle Defense</h3>
+            <p>A Idle defense game</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Tu6jgnMuiFU" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="project">
+            <h3 style="font-size: 115%; text-transform: uppercase;">Axie Survival</h3>
+            <p>A personal project for game jam</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/TtTsZSrLIIA" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="project">
+            <h3 style="font-size: 115%; text-transform: uppercase;">Little Samson Remake</h3>
+            <p>A student project</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/YplGN75XjMo" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </section>
+</body>
+</html>

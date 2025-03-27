@@ -1,5 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Developer Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector(".tablinks").click();
+        });
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2E2B28;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding-top: 50px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 55%;
+            padding: 20px;
+            background-color: #403D39;
+            border-radius: 10px;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .header-subtitle {
+            font-size: 16px;
+        }
+        .tab {
+            display: flex;
+            gap: 15px;
+        }
+        .tab button {
+            background-color: inherit;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: 0.3s;
+            font-size: 16px;
+            color: white;
+        }
+        .tab button:hover {
+            background-color: #5C5346;
+        }
+        .tab button.active {
+            background-color: #726658;
+        }
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            width: 55%;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .project {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .contact-highlight {
+            font-weight: bold;
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1 class="header-title">NGUYEN PHAN CUONG</h1>
+            <p class="header-subtitle">Game Developer | Unity | Roblox</p>
+        </div>
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Projects')">Projects</button>
+        </div>
+    </header>
+    
+    <section id="Projects" class="tabcontent" style="display:block;">
+        <h2>Projects</h2>
         <div class="project">
-            <h3 style="font-size: 115%; text-transform: uppercase;">Frog Idle</h3>
+            <h3>Main Land</h3>
+            <p>A multiplayer place in Roblox where users can go shopping, selfie, and play many minigames together.</p>
+            <p><a href="https://www.roblox.com/games/10826669694/CORSAIR-Land" target="_blank" style="color: #FFD700; font-weight: bold;">Play on Roblox</a></p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/0TRUos_xuAA" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="project">
+            <h3>Zombie Idle Defense</h3>
+            <p>An Idle defense game.</p>
+            <p><a href="https://play.google.com/store/apps/details?id=tdcgame.zombie.idle.defense&hl=en" target="_blank" style="color: #FFD700; font-weight: bold;">Download on Google Play</a></p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Tu6jgnMuiFU" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="project">
+            <h3>Frog Idle</h3>
             <p>A laze merge game.</p>
             <p><a href="https://play.google.com/store/apps/details?id=lazy.frog.idle&hl=en" target="_blank" style="color: #FFD700; font-weight: bold;">Download on Google Play</a></p>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/CxbhK2FeUh8" frameborder="0" allowfullscreen></iframe>

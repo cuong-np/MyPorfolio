@@ -1,78 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Developer Portfolio</title>
+    <style>
+        :root {
+            --bg-dark: #2E2B28;
+            --bg-medium: #403D39;
+            --bg-light: #5C5346;
+            --accent-color: #FFA500;
+            --text-color: #FFFFFF;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 25px;
+            background-color: var(--bg-medium);
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .header-title {
+            font-size: 28px;
+            color: var(--accent-color);
+        }
+
+        .tab button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+        }
+
+        .tab button.active {
+            background: orange;
+            color: black;
+        }
+
+        .tabcontent {
+            display: none;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: var(--bg-medium);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .project-video {
+            width: 100%;
+            height: 200px;
+        }
+
+        .project-content {
+            padding: 15px;
+        }
+
+        .project-title {
+            color: orange;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 10px;
+            background: orange;
+            padding: 8px 15px;
+            text-decoration: none;
+            color: black;
+            border-radius: 5px;
+        }
+    </style>
+
+    <script>
+        function openTab(evt, tabName) {
+            let tabcontent = document.getElementsByClassName("tabcontent");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            let tablinks = document.getElementsByClassName("tablinks");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        window.onload = () => {
+            document.querySelector(".tablinks").click();
+        };
+    </script>
+</head>
+
+<body>
+
+<header>
+    <div>
+        <h1 class="header-title">NGUYEN PHAN CUONG</h1>
+        <p>Game Developer | Unity | Roblox</p>
+    </div>
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'About')">About</button>
+        <button class="tablinks" onclick="openTab(event, 'Projects')">Projects</button>
+    </div>
+</header>
+
+<section id="About" class="tabcontent">
+    <h2>About Me</h2>
+    <p>I have been a game developer for 6 years, working in Unity and Roblox.</p>
+</section>
+
 <section id="Projects" class="tabcontent">
-    <h2 style="color: var(--accent-color); margin-top: 0;">My Projects</h2>
-    <p style="margin-bottom: 30px;">Here are some of my notable game development projects:</p>
-    
+    <h2>My Projects</h2>
+
     <div class="projects-grid">
+
+        <!-- Corsair -->
         <div class="project-card">
-            <iframe class="project-video" src="https://www.youtube.com/embed/0TRUos_xuAA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="project-video" src="https://www.youtube.com/embed/0TRUos_xuAA"></iframe>
             <div class="project-content">
                 <h3 class="project-title">Corsair Land</h3>
-                <p class="project-description">A vibrant multiplayer hub in Roblox where players can shop, take selfies, and enjoy various minigames together.</p>
-                <a href="https://www.roblox.com/games/10826669694/CORSAIR-Land" class="project-link" target="_blank">Play Now</a>
+                <p>A Roblox multiplayer hub.</p>
+                <a href="https://www.roblox.com/games/10826669694/CORSAIR-Land" class="project-link">Play</a>
             </div>
         </div>
-        
+
+        <!-- Zombie -->
         <div class="project-card">
-            <iframe class="project-video" src="https://www.youtube.com/embed/Tu6jgnMuiFU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="project-video" src="https://www.youtube.com/embed/Tu6jgnMuiFU"></iframe>
             <div class="project-content">
                 <h3 class="project-title">Zombie Idle Defense</h3>
-                <p class="project-description">An engaging idle defense game with strategic elements and progressive difficulty.</p>
-                <a href="https://play.google.com/store/apps/details?id=tdcgame.zombie.idle.defense&hl=en" class="project-link" target="_blank">Play Now</a>
+                <p>Idle defense game.</p>
+                <a href="https://play.google.com/store/apps/details?id=tdcgame.zombie.idle.defense&hl=en" class="project-link">Play</a>
             </div>
         </div>
 
+        <!-- NEW PROJECT -->
         <div class="project-card">
-            <iframe class="project-video" src="https://www.youtube.com/embed/BbcUYO1AsFc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="project-video" src="https://www.youtube.com/embed/BbcUYO1AsFc"></iframe>
             <div class="project-content">
                 <h3 class="project-title">Awakening of Guardians</h3>
-                <p class="project-description">Awakening of Guardians is fantastic role playing game with both action and idle game elements.</p>
-                <a href="https://play.google.com/store/apps/details?id=com.mobicom.defenderking&hl=en" class="project-link" target="_blank">Play Now</a>
-            </div>
-        </div>
-        
-        <div class="project-card">
-            <iframe class="project-video" src="https://www.youtube.com/embed/CxbhK2FeUh8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <div class="project-content">
-                <h3 class="project-title">Frog Idle</h3>
-                <p class="project-description">A relaxing merge game with cute frog characters and satisfying progression.</p>
-                <a href="https://play.google.com/store/apps/details?id=lazy.frog.idle&hl=en" class="project-link" target="_blank">Play Now</a>
+                <p>Awakening of Guardians is a fantastic role-playing game with both action and idle gameplay elements.</p>
+                <a href="https://play.google.com/store/apps/details?id=com.mobicom.defenderking&hl=en" class="project-link">Play</a>
             </div>
         </div>
 
+        <!-- Frog -->
         <div class="project-card">
-            <iframe class="project-video" src="https://www.youtube.com/embed/" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="project-video" src="https://www.youtube.com/embed/CxbhK2FeUh8"></iframe>
             <div class="project-content">
-                <h3 class="project-title">Pool Legend</h3>
-                <p class="project-description">A fun and competitive billiards game with realistic physics and engaging gameplay.</p>
-                <a href="https://play.google.com/store/apps/details?id=com.tdcgames.pool.legend&hl=en&pli=1" class="project-link" target="_blank">Play Now</a>
+                <h3 class="project-title">Frog Idle</h3>
+                <p>Relaxing merge game.</p>
+                <a href="https://play.google.com/store/apps/details?id=lazy.frog.idle&hl=en" class="project-link">Play</a>
             </div>
         </div>
-        
-        <div class="project-card">
-            <iframe class="project-video" src="https://www.youtube.com/embed/TtTsZSrLIIA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <div class="project-content">
-                <h3 class="project-title">Axie Survival</h3>
-                <p class="project-description">A game jam project featuring survival mechanics with Axie characters.</p>
-                <a href="https://theclownz.itch.io/axies-survival" class="project-link" target="_blank">Play Now</a>
-            </div>
-        </div>
-        
-        <div class="project-card">
-            <iframe class="project-video" src="https://www.youtube.com/embed/YplGN75XjMo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <div class="project-content">
-                <h3 class="project-title">Little Samson Remake</h3>
-                <p class="project-description">A student project recreating the classic NES game with modern enhancements.</p>
-                <a href="https://theclownz.itch.io/little-samson-remake" class="project-link" target="_blank">Play Now</a>
-            </div>
-        </div>
-        
-        <div class="project-card">
-            <iframe class="project-video" src="https://www.youtube.com/embed/4RBzwdxRiag" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <div class="project-content">
-                <h3 class="project-title">Bounce Return Nokia Remake</h3>
-                <p class="project-description">A faithful recreation of the classic Nokia mobile game.</p>
-                <a href="https://theclownz.itch.io/bounce-return-nokia" class="project-link" target="_blank">Play Now</a>
-            </div>
-        </div>         
+
     </div>
 </section>
+
+</body>
+</html>

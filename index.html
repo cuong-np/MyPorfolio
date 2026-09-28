@@ -11,6 +11,13 @@
             --bg-light: #5C5346;
             --accent-color: #FFA500;
             --text-color: #FFFFFF;
+            --muted-text: rgba(255, 255, 255, 0.78);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
         }
         
         body {
@@ -25,9 +32,13 @@
             min-height: 100vh;
             padding: 30px 20px;
             line-height: 1.6;
+            overflow-x: clip;
         }
         
         header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -38,6 +49,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             margin-bottom: 30px;
+            gap: 24px;
         }
         
         .header-content {
@@ -53,11 +65,61 @@
         
         .header-subtitle {
             font-size: 16px;
-            opacity: 0.9;
+            color: var(--muted-text);
+            margin: 0;
+        }
+
+        .header-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .header-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 9px 16px;
+            border: 1px solid rgba(255, 165, 0, 0.7);
+            border-radius: 8px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .header-link.primary {
+            background-color: var(--accent-color);
+            color: var(--bg-dark);
+        }
+
+        .header-link:hover,
+        .header-link:focus-visible {
+            background-color: var(--accent-color);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+        }
+
+        a:focus-visible {
+            outline: 3px solid #FFD27A;
+            outline-offset: 3px;
+        }
+
+        button:focus-visible {
+            outline: 3px solid #FFD27A;
+            outline-offset: 4px;
+        }
+
+        main {
+            width: 100%;
+            max-width: 1200px;
         }
         
         .tabcontent {
             display: block;
+            scroll-margin-top: 170px;
             padding: 30px;
             width: 100%;
             max-width: 1200px;
@@ -65,6 +127,16 @@
             background-color: rgba(255, 255, 255, 0.08);
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            color: var(--accent-color);
+            margin: 0 0 8px;
+        }
+
+        .section-intro {
+            margin: 0 0 30px;
+            color: var(--muted-text);
         }
         
         .about-container {
@@ -76,7 +148,8 @@
         }
         
         .about-text {
-            width: 60%;
+            flex: 1 1 420px;
+            min-width: 0;
             text-align: left;
         }
         
@@ -88,6 +161,7 @@
         .about-avatar {
             width: 180px;
             height: 180px;
+            flex: 0 0 180px;
             border-radius: 50%;
             border: 4px solid var(--accent-color);
             object-fit: cover;
@@ -100,48 +174,267 @@
             display: inline-block;
             margin-top: 10px;
         }
+
+        .contact-highlight a {
+            color: var(--text-color);
+            font-weight: 600;
+        }
         
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
             gap: 30px;
             width: 100%;
         }
         
         .project-card {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            padding: 0;
+            border: 0;
             background-color: var(--bg-medium);
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            color: inherit;
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .project-card:hover {
+        .project-card:hover,
+        .project-card:focus-visible {
             transform: translateY(-5px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.32);
         }
         
-        .project-video {
+        .project-thumbnail-wrap {
+            display: block;
+            position: relative;
             width: 100%;
-            height: 200px;
-            border: none;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background-color: #201E1C;
         }
-        
-        .project-content {
-            padding: 20px;
+
+        .project-thumbnail {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            transition: transform 0.35s ease;
         }
-        
-        .project-title {
-            color: var(--accent-color);
-            margin: 0 0 10px 0;
+
+        .project-card:hover .project-thumbnail,
+        .project-card:focus-visible .project-thumbnail {
+            transform: scale(1.04);
+        }
+
+        .project-card-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: grid;
+            width: 52px;
+            height: 52px;
+            place-items: center;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            border-radius: 50%;
+            background: rgba(20, 18, 16, 0.72);
+            color: #fff;
             font-size: 20px;
+            padding-left: 3px;
         }
-        
-        .project-description {
-            margin: 0 0 15px 0;
-            font-size: 15px;
-            opacity: 0.9;
+
+        .project-card-title {
+            display: block;
+            padding: 13px 16px;
+            color: var(--accent-color);
+            font-size: 17px;
+            font-weight: 700;
         }
-        
+
+        .project-dialog {
+            position: relative;
+            width: min(900px, calc(100vw - 32px));
+            max-width: none;
+            max-height: calc(100vh - 32px);
+            padding: 0;
+            overflow: auto;
+            border: 1px solid rgba(255, 165, 0, 0.35);
+            border-radius: 14px;
+            background: var(--bg-dark);
+            color: var(--text-color);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+        }
+
+        .project-dialog::backdrop {
+            background: rgba(0, 0, 0, 0.78);
+            backdrop-filter: blur(3px);
+        }
+
+        .project-dialog-video {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: 0;
+            background: #201E1C;
+        }
+
+        .project-dialog-body {
+            padding: 24px 28px 28px;
+        }
+
+        .project-dialog-title {
+            margin: 0 0 8px;
+            color: var(--accent-color);
+            font-size: 26px;
+        }
+
+        .project-dialog-summary {
+            margin: 0 0 20px;
+            color: var(--muted-text);
+        }
+
+        .project-dialog-body h3 {
+            margin: 0 0 10px;
+            font-size: 17px;
+        }
+
+        .project-work-list {
+            margin: 0 0 22px;
+            padding-left: 22px;
+            color: var(--muted-text);
+        }
+
+        .project-work-list li + li {
+            margin-top: 6px;
+        }
+
+        .resume-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .resume-top .section-title {
+            margin: 0;
+        }
+
+        .resume-experience,
+        .resume-info-card {
+            padding: 20px 22px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.045);
+        }
+
+        .resume-section-heading,
+        .resume-info-card h3 {
+            margin: 0 0 10px;
+            color: var(--accent-color);
+        }
+
+        .resume-experience p {
+            margin: 0;
+            color: var(--muted-text);
+        }
+
+        .resume-section-heading {
+            margin-bottom: 14px;
+        }
+
+        .resume-experience-list {
+            display: grid;
+            gap: 14px;
+            margin-bottom: 26px;
+        }
+
+        .resume-experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 4px;
+        }
+
+        .resume-experience-header h4 {
+            margin: 0;
+            color: var(--text-color);
+            font-size: 17px;
+        }
+
+        .resume-date {
+            flex-shrink: 0;
+            color: var(--muted-text);
+            font-size: 14px;
+        }
+
+        .resume-company {
+            margin-bottom: 8px !important;
+            color: var(--accent-color) !important;
+        }
+
+        .resume-experience ul {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--muted-text);
+        }
+
+        .resume-experience li + li {
+            margin-top: 5px;
+        }
+
+        .resume-bottom-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .resume-info-card p {
+            margin: 0;
+            color: var(--muted-text);
+        }
+
+        .resume-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .resume-skills li {
+            padding: 5px 10px;
+            border: 1px solid rgba(255, 165, 0, 0.35);
+            border-radius: 999px;
+            color: var(--muted-text);
+            font-size: 13px;
+        }
+
+        .project-dialog-close {
+            position: absolute;
+            z-index: 1;
+            top: 12px;
+            right: 12px;
+            display: grid;
+            width: 40px;
+            height: 40px;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 50%;
+            background: rgba(20, 18, 16, 0.78);
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
         .project-link {
             display: inline-block;
             padding: 10px 20px;
@@ -157,12 +450,54 @@
             background-color: #FF8C00;
             transform: scale(1.05);
         }
+
+        @media (max-width: 600px) {
+            .project-dialog-body {
+                padding: 20px;
+            }
+
+            .project-dialog-title {
+                font-size: 22px;
+            }
+
+            .resume-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .resume-experience-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+            }
+
+            .resume-bottom-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        footer {
+            width: 100%;
+            max-width: 1200px;
+            padding: 24px 0 4px;
+            color: var(--muted-text);
+            text-align: center;
+            font-size: 14px;
+        }
         
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
                 text-align: center;
                 gap: 20px;
+            }
+
+            .tabcontent {
+                scroll-margin-top: 280px;
+            }
+
+            .header-actions {
+                justify-content: center;
             }
             
             .about-container {
@@ -172,7 +507,7 @@
             }
             
             .about-text {
-                width: 100%;
+                flex-basis: 100%;
                 text-align: center;
                 margin-bottom: 20px;
             }
@@ -189,100 +524,201 @@
             <h1 class="header-title">NGUYEN PHAN CUONG</h1>
             <p class="header-subtitle">Game Developer | Unity | Roblox</p>
         </div>
+        <nav class="header-actions" aria-label="Primary navigation">
+            <a class="header-link" href="#about">About</a>
+            <a class="header-link" href="#resume">Resume</a>
+            <a class="header-link" href="#projects">Projects</a>
+            <a class="header-link primary" href="Game%20Developer-%20Nguyen%20Phan%20Cuong.pdf" target="_blank" rel="noopener noreferrer">Download CV</a>
+        </nav>
     </header>
-    
-    <section id="About" class="tabcontent">
+
+    <main>
+    <section id="about" class="tabcontent" aria-labelledby="about-title">
         <div class="about-container">
             <div class="about-text">
-                <h2>About Me</h2>
-                <p>I have been a game developer for 6 years, working in Unity and Roblox.</p>
+                <h2 id="about-title">About Me</h2>
+                <p>I have been a game developer for 7 years, working in Unity and Roblox.</p>
                 <p>Familiar with animation, physics, materials, and networking in game development.</p>
                 <p>Skilled in debugging and optimizing game performance.</p>
                 <p>Experienced in game mechanics, user interactions, and multiplayer features.</p>
                 <h3>Contact</h3>
-                <p class="contact-highlight">Email: nguyenphancuong097@gmail.com</p>
+                <p class="contact-highlight">Email: <a href="mailto:nguyenphancuong097@gmail.com">nguyenphancuong097@gmail.com</a></p>
             </div>
-            <img class="about-avatar" src="https://github.com/cuong-np.png" alt="GitHub Avatar">
+            <img class="about-avatar" src="https://github.com/cuong-np.png" alt="Nguyen Phan Cuong GitHub avatar" width="180" height="180" loading="lazy">
         </div>
     </section>
-    
-    <section id="Projects" class="tabcontent">
-        <h2 style="color: var(--accent-color); margin-top: 0;">My Projects</h2>
-        <p style="margin-bottom: 30px;">Here are some of my notable game development projects:</p>
-        
+
+    <section id="resume" class="tabcontent" aria-labelledby="resume-title">
+        <div class="resume-top">
+            <h2 id="resume-title" class="section-title">Resume</h2>
+            <a class="project-link" href="Game%20Developer-%20Nguyen%20Phan%20Cuong.pdf" target="_blank" rel="noopener noreferrer">Download PDF</a>
+        </div>
+
+        <h3 class="resume-section-heading">Work Experience</h3>
+        <div class="resume-experience-list">
+            <article class="resume-experience">
+                <div class="resume-experience-header">
+                    <h4>Roblox Developer</h4>
+                    <span class="resume-date">Jun 2023 – Present</span>
+                </div>
+                <p class="resume-company">Hiptech · Ho Chi Minh City · Remote</p>
+                <ul>
+                    <li>Built multiplayer Roblox experiences with minigames, pet RPG systems, shops, inventory, mailbox, and daily quests.</li>
+                    <li>Created limited-time competitive events with point-based leaderboards and UGC rewards.</li>
+                    <li>Inspected 3D models for mesh defects and Roblox UGC and avatar accessory requirements.</li>
+                    <li>Implemented matchmaking and teleportation between servers and experiences.</li>
+                    <li>Built server-side validation, player-data handling, and anti-cheat systems.</li>
+                    <li>Debugged and optimized performance, memory, and asset loading.</li>
+                    <li>Optimized world loading with StreamingEnabled.</li>
+                </ul>
+            </article>
+
+            <article class="resume-experience">
+                <div class="resume-experience-header">
+                    <h4>Unity Developer</h4>
+                    <span class="resume-date">Jan 2024 – Sep 2026</span>
+                </div>
+                <p class="resume-company">TDC Game · Hanoi · Remote</p>
+                <ul>
+                    <li>Developed gameplay systems for idle defense and simulator games in Unity.</li>
+                    <li>Implemented Addressables for asset loading and content management.</li>
+                    <li>Implemented Photon networking for multiplayer PvP modes.</li>
+                    <li>Ported projects to WebGL and built custom browser integrations.</li>
+                    <li>Optimized draw calls, shaders, VFX, build size, and memory usage.</li>
+                    <li>Investigated production crashes using Firebase.</li>
+                </ul>
+            </article>
+
+            <article class="resume-experience">
+                <div class="resume-experience-header">
+                    <h4>Unity Developer</h4>
+                    <span class="resume-date">Feb 2020 – Jun 2023</span>
+                </div>
+                <p class="resume-company">Wejoy Game Studio · Ho Chi Minh City</p>
+                <ul>
+                    <li>Developed gameplay systems for casual and puzzle games in Unity.</li>
+                    <li>Optimized rendering and custom shaders; improved VFX.</li>
+                    <li>Reduced build size and memory usage.</li>
+                </ul>
+            </article>
+        </div>
+
+        <div class="resume-bottom-grid">
+            <article class="resume-info-card">
+                <h3>Education</h3>
+                <p><strong>Software Engineer</strong><br>University of Information Technology<br>Sep 2015 – Oct 2020</p>
+            </article>
+            <article class="resume-info-card">
+                <h3>Skills</h3>
+                <ul class="resume-skills">
+                    <li>C#</li>
+                    <li>Lua</li>
+                    <li>Unity</li>
+                    <li>Roblox</li>
+                    <li>Photon</li>
+                    <li>Addressables</li>
+                    <li>WebGL</li>
+                    <li>Firebase</li>
+                    <li>Git</li>
+                    <li>Shaders</li>
+                    <li>VFX</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <section id="projects" class="tabcontent" aria-labelledby="projects-title">
+        <h2 id="projects-title" class="section-title">My Projects</h2>
+        <p class="section-intro">Here are some of my notable game development projects:</p>
+
         <div class="projects-grid">
-            <div class="project-card">
-                <iframe class="project-video" src="https://www.youtube.com/embed/0TRUos_xuAA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <div class="project-content">
-                    <h3 class="project-title">Corsair Land</h3>
-                    <p class="project-description">A vibrant multiplayer hub in Roblox where players can shop, take selfies, and enjoy various minigames together.</p>
-                    <a href="https://www.roblox.com/games/10826669694/CORSAIR-Land" class="project-link" target="_blank">Play Now</a>
-                </div>
-            </div>
+            <button class="project-card" type="button" aria-haspopup="dialog" aria-label="View Corsair Land details" data-title="Corsair Land" data-video="0TRUos_xuAA" data-summary="A social Roblox experience with multiplayer minigames, shops, and pet RPG systems." data-work="Developed multiplayer minigames and pet RPG systems.|Built shops, inventory, mailbox, and daily quests.|Created limited-time competitions with point-based leaderboards and UGC rewards.|Implemented matchmaking, server-side validation, player-data handling, and anti-cheat.|Optimized performance, memory, asset loading, and world streaming with StreamingEnabled." data-play-url="https://www.roblox.com/games/10826669694/CORSAIR-Land">
+                <span class="project-thumbnail-wrap"><img class="project-thumbnail" src="https://img.youtube.com/vi/0TRUos_xuAA/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="project-card-play" aria-hidden="true">▶</span></span>
+                <span class="project-card-title">Corsair Land</span>
+            </button>
 
-            <div class="project-card">
-                <iframe class="project-video" src="https://www.youtube.com/embed/j1JomGUTTgE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <div class="project-content">
-                    <h3 class="project-title">Tamagotchi Party</h3>
-                    <p class="project-description">A vibrant multiplayer hub in Roblox where players can enjoy various minigames together.</p>
-                    <a href="https://www.roblox.com/games/133547920834250/Tamagotchi-Party-1-0" class="project-link" target="_blank">Play Now</a>
-                </div>
-            </div>
+            <button class="project-card" type="button" aria-haspopup="dialog" aria-label="View Tamagotchi Party details" data-title="Tamagotchi Party" data-video="j1JomGUTTgE" data-summary="A multiplayer Roblox party game centered on minigames and custom characters." data-work="Developed multiplayer minigames.|Set up custom characters.|Implemented matchmaking and player teleportation between servers." data-play-url="https://www.roblox.com/games/133547920834250/Tamagotchi-Party-1-0">
+                <span class="project-thumbnail-wrap"><img class="project-thumbnail" src="https://img.youtube.com/vi/j1JomGUTTgE/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="project-card-play" aria-hidden="true">▶</span></span>
+                <span class="project-card-title">Tamagotchi Party</span>
+            </button>
             
-            <div class="project-card">
-                <iframe class="project-video" src="https://www.youtube.com/embed/Tu6jgnMuiFU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <div class="project-content">
-                    <h3 class="project-title">Zombie Idle Defense</h3>
-                    <p class="project-description">An engaging idle defense game with strategic elements and progressive difficulty, with over 5 million downloads.</p>
-                    <a href="https://play.google.com/store/apps/details?id=tdcgame.zombie.idle.defense&hl=en" class="project-link" target="_blank">Play Now</a>
-                </div>
-            </div>
-            <div class="project-card">
-                <iframe class="project-video" src="https://www.youtube.com/embed/TtTsZSrLIIA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <div class="project-content">
-                    <h3 class="project-title">Axie Survival</h3>
-                    <p class="project-description">A game jam project featuring survival mechanics with Axie characters.</p>
-                    <a href="https://theclownz.itch.io/axies-survival" class="project-link" target="_blank">Play Now</a>
-                </div>
-            </div>
-            
+            <button class="project-card" type="button" aria-haspopup="dialog" aria-label="View Zombie Idle Defense details" data-title="Zombie Idle Defense" data-video="Tu6jgnMuiFU" data-summary="An idle defense game with strategic gameplay and progressive challenges, with over 5 million downloads." data-work="Developed gameplay systems for an idle defense game.|Implemented Addressables for asset loading and content management.|Built PvP multiplayer modes with Photon.|Optimized draw calls, shaders, VFX, build size, and memory.|Investigated production crashes with Firebase." data-play-url="https://play.google.com/store/apps/details?id=tdcgame.zombie.idle.defense&amp;hl=en">
+                <span class="project-thumbnail-wrap"><img class="project-thumbnail" src="https://img.youtube.com/vi/Tu6jgnMuiFU/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="project-card-play" aria-hidden="true">▶</span></span>
+                <span class="project-card-title">Zombie Idle Defense</span>
+            </button>
+            <button class="project-card" type="button" aria-haspopup="dialog" aria-label="View Awakening of Guardians details" data-title="Awakening of Guardians" data-video="BbcUYO1AsFc" data-summary="An action RPG combining active combat, idle progression, and multiplayer PvP, with over 1 million downloads." data-work="Developed gameplay systems and features for an action and idle RPG.|Implemented PvP multiplayer modes with Photon.|Optimized draw calls, shaders, VFX, and memory." data-play-url="https://play.google.com/store/apps/details?id=com.mobicom.defenderking&amp;hl=en">
+                <span class="project-thumbnail-wrap"><img class="project-thumbnail" src="https://img.youtube.com/vi/BbcUYO1AsFc/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="project-card-play" aria-hidden="true">▶</span></span>
+                <span class="project-card-title">Awakening of Guardians</span>
+            </button>
 
-            <div class="project-card">
-                <iframe class="project-video" src="https://www.youtube.com/embed/BbcUYO1AsFc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <div class="project-content">
-                    <h3 class="project-title">Awakening of Guardians</h3>
-                    <p class="project-description">Awakening of Guardians is a role-playing game with both action and idle gameplay elements, with over 1 million downloads.</p>
-                    <a href="https://play.google.com/store/apps/details?id=com.mobicom.defenderking&hl=en" class="project-link" target="_blank">Play Now</a>
-                </div>
-            </div>
-            
-            <div class="project-card">
-                <iframe class="project-video" src="https://www.youtube.com/embed/CxbhK2FeUh8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <div class="project-content">
-                    <h3 class="project-title">Frog Idle</h3>
-                    <p class="project-description">A relaxing merge game with cute frog characters and satisfying progression.</p>
-                    <a href="https://play.google.com/store/apps/details?id=lazy.frog.idle&hl=en" class="project-link" target="_blank">Play Now</a>
-                </div>
-            </div>
+            <button class="project-card" type="button" aria-haspopup="dialog" aria-label="View Frog Idle details" data-title="Frog Idle" data-video="CxbhK2FeUh8" data-summary="A casual idle merge game featuring cute frog characters." data-work="Developed casual gameplay systems.|Optimized rendering, VFX, build size, and memory." data-play-url="https://play.google.com/store/apps/details?id=lazy.frog.idle&amp;hl=en">
+                <span class="project-thumbnail-wrap"><img class="project-thumbnail" src="https://img.youtube.com/vi/CxbhK2FeUh8/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="project-card-play" aria-hidden="true">▶</span></span>
+                <span class="project-card-title">Frog Idle</span>
+            </button>
 
-            <div class="project-card">
-                <iframe class="project-video" src="https://www.youtube.com/embed/YplGN75XjMo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <div class="project-content">
-                    <h3 class="project-title">Little Samson Remake</h3>
-                    <p class="project-description">A student project recreating the classic NES game with modern enhancements.</p>
-                    <a href="https://theclownz.itch.io/little-samson-remake" class="project-link" target="_blank">Play Now</a>
-                </div>
-            </div>
+            <button class="project-card" type="button" aria-haspopup="dialog" aria-label="View Axie Survival details" data-title="Axie Survival" data-video="TtTsZSrLIIA" data-summary="A solo-developed game jam survival game featuring Axie characters." data-work="Solo-developed the project.|Created the survival gameplay and integrated Axie characters using Unity and C#." data-play-url="https://theclownz.itch.io/axies-survival">
+                <span class="project-thumbnail-wrap"><img class="project-thumbnail" src="https://img.youtube.com/vi/TtTsZSrLIIA/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="project-card-play" aria-hidden="true">▶</span></span>
+                <span class="project-card-title">Axie Survival</span>
+            </button>
+
+            <button class="project-card" type="button" aria-haspopup="dialog" aria-label="View Little Samson Remake details" data-title="Little Samson Remake" data-video="YplGN75XjMo" data-summary="A solo-developed remake of the classic NES game Little Samson." data-work="Solo-developed the remake.|Recreated the core gameplay using Unity and C#." data-play-url="https://theclownz.itch.io/little-samson-remake">
+                <span class="project-thumbnail-wrap"><img class="project-thumbnail" src="https://img.youtube.com/vi/YplGN75XjMo/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="project-card-play" aria-hidden="true">▶</span></span>
+                <span class="project-card-title">Little Samson Remake</span>
+            </button>
             
-            <div class="project-card">
-                <iframe class="project-video" src="https://www.youtube.com/embed/4RBzwdxRiag" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <div class="project-content">
-                    <h3 class="project-title">Bounce Return Nokia Remake</h3>
-                    <p class="project-description">A faithful recreation of the classic Nokia mobile game.</p>
-                    <a href="https://theclownz.itch.io/bounce-return-nokia" class="project-link" target="_blank">Play Now</a>
-                </div>
-            </div>         
+            <button class="project-card" type="button" aria-haspopup="dialog" aria-label="View Bounce Return Nokia Remake details" data-title="Bounce Return Nokia Remake" data-video="4RBzwdxRiag" data-summary="A solo-developed remake of the classic Nokia platform game Bounce." data-work="Solo-developed the remake.|Recreated the original movement and platforming gameplay using Unity and C#." data-play-url="https://theclownz.itch.io/bounce-return-nokia">
+                <span class="project-thumbnail-wrap"><img class="project-thumbnail" src="https://img.youtube.com/vi/4RBzwdxRiag/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="project-card-play" aria-hidden="true">▶</span></span>
+                <span class="project-card-title">Bounce Return Nokia Remake</span>
+            </button>
         </div>
     </section>
+
+    <dialog class="project-dialog" id="project-dialog" aria-labelledby="project-dialog-title">
+        <button class="project-dialog-close" id="project-dialog-close" type="button" aria-label="Close project details">×</button>
+        <iframe class="project-dialog-video" id="project-dialog-video" title="Project gameplay video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="project-dialog-body">
+            <h2 class="project-dialog-title" id="project-dialog-title"></h2>
+            <p class="project-dialog-summary" id="project-dialog-summary"></p>
+            <h3>Development</h3>
+            <ul class="project-work-list" id="project-work-list"></ul>
+            <a class="project-link" id="project-play-link" href="#" target="_blank" rel="noopener noreferrer">Play Now</a>
+        </div>
+    </dialog>
+    </main>
+
+    <footer>© 2026 Nguyen Phan Cuong · Game Developer</footer>
+    <script>
+        const projectDialog = document.getElementById('project-dialog');
+        const projectVideo = document.getElementById('project-dialog-video');
+        const projectWorkList = document.getElementById('project-work-list');
+
+        document.querySelectorAll('.project-card').forEach((card) => {
+            card.addEventListener('click', () => {
+                document.getElementById('project-dialog-title').textContent = card.dataset.title;
+                document.getElementById('project-dialog-summary').textContent = card.dataset.summary;
+                document.getElementById('project-play-link').href = card.dataset.playUrl;
+                projectVideo.title = `${card.dataset.title} gameplay video`;
+                projectVideo.src = `https://www.youtube.com/embed/${card.dataset.video}?rel=0`;
+                projectWorkList.replaceChildren(...card.dataset.work.split('|').map((item) => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = item;
+                    return listItem;
+                }));
+                projectDialog.showModal();
+            });
+        });
+
+        document.getElementById('project-dialog-close').addEventListener('click', () => {
+            projectDialog.close();
+        });
+
+        projectDialog.addEventListener('click', (event) => {
+            if (event.target === projectDialog) projectDialog.close();
+        });
+
+        projectDialog.addEventListener('close', () => {
+            projectVideo.removeAttribute('src');
+        });
+    </script>
 </body>
 </html>
